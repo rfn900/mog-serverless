@@ -1,3 +1,4 @@
 .env
 env/
 .vim/
+zappa_settings.json
