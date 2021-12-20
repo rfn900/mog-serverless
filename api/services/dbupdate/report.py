@@ -20,7 +20,7 @@ def handler():
 
     adtraction = pull_adtraction_data(str(first_of_the_month), str(last_of_the_month))
 
-    # awin = pull_awin_data(str(first_of_the_month), str(last_of_the_month))
+    awin = pull_awin_data(str(first_of_the_month), str(last_of_the_month))
 
     tradedoubler = pull_tradedoubler_data(
         str(first_of_the_month), str(last_of_the_month), "month"
