@@ -25,19 +25,16 @@ def handler():
     tradedoubler = pull_tradedoubler_data(
         str(first_of_the_month), str(last_of_the_month), "month"
     )
-    print("***********HELLOOOOOOO**********")
 
     commissions = [
         {"program": "adtraction", "value": adtraction["commission"]},
         {"program": "tradedoubler", "value": tradedoubler["commission"]},
-        # {"program": "awin", "value": awin["commission"]},
+        {"program": "awin", "value": awin["commission"]},
         {"program": "adrecord", "value": adrecord["commission"]},
         {"program": "misc", "value": 0},  # For now...
     ]
 
     data = {"results": commissions, "date": str(last_of_the_month)}
-
-    print("***********BUNDAAAAAAA**********")
 
     com = db.save_commissions_to_db(data)
 

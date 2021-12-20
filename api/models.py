@@ -9,9 +9,9 @@ class Database:
         try:
             client = MongoClient(self.uri)
             self.database = client.affiliate_report
-            print("Connected to db")
+            print("Connected to DB")
         except:
-            print("Deu merda na DB")
+            print("Failed to connect to DB")
 
     def save_commissions_to_db(self, data):
         try:
@@ -19,8 +19,7 @@ class Database:
             print(f"Add commissions to DB on: {date.today()}")
             return 1
         except:
-            print("Deu merda na hora de inserir na DB")
+            print(f"Failed to add commissions to DB on: {date.today()}")
 
     def load_monthly_results(self):
-        print("Tentando listar tudo")
         return self.database.monthly_results.find()
