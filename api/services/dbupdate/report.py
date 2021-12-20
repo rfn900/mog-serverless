@@ -10,7 +10,7 @@ db = Database()
 db.initialize()
 
 
-def bunda():
+def handler():
     # This works specifically for function scheduling for the 1st of every month
     last_of_the_month = date.today() - timedelta(days=1)
     dt = last_of_the_month
