@@ -23,3 +23,9 @@ class Database:
 
     def load_monthly_results(self):
         return self.database.monthly_results.find()
+
+    def save_mediavine_revenue(self, data):
+        try:
+            self.database.mediavine_revenue.insert_one(data)
+        except:
+            print(f"Failed to add mediavine revenue to DB on: {date.today()}")
