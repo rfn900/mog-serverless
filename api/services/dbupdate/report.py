@@ -36,6 +36,6 @@ def handler():
 
     data = {"results": commissions, "date": str(last_of_the_month)}
 
-    com = db.save_commissions_to_db(data)
+    _ = db.save_commissions_to_db(data)
 
     return 1
