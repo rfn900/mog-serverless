@@ -4,6 +4,19 @@ on:
   push:
     branches:
       - main
+    paths:
+      - api/**
+      - utils/**
+      - zappa_settings.json
+      - run.py
+  pull_request:
+    branches:
+      - main
+    paths:
+      - api/**
+      - utils/**
+      - zappa_settings.json
+      - run.py
 
 jobs:
   build:
@@ -12,10 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
 
-      - name: Run a multi-line script
-        run: |
-          echo Add yet another action to build,
-          echo test, and deploy your project
+      - name: Check python version
+        run: python --version
