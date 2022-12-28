@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from api import commissions, home, services
+from api import commissions, forms, home, auth, services
 
 
 def create_app():
@@ -17,5 +17,7 @@ def create_app():
     app.register_blueprint(commissions.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(services.bp)
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(forms.bp)
 
     return app
