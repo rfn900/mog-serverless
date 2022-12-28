@@ -1,11 +1,11 @@
 # This function should be executed on the 1st of every monthly_results
 # to query the monthly commissions of the previous month
 from datetime import date, timedelta
-from api.models import Commissions
 from api.commissions.controllers.adrecord import pull_adrecord_data
 from api.commissions.controllers.adtraction import pull_adtraction_data
 from api.commissions.controllers.awin import pull_awin_data
 from api.commissions.controllers.tradedoubler import pull_tradedoubler_data
+from api.commissions.model import Commissions
 
 
 def grab_commissions_and_save_to_db(event, context):

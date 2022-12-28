@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from api.models import Commissions
+from api.commissions.model import Commissions
 from api.commissions.controllers.adrecord import pull_adrecord_data
 from api.commissions.controllers.adtraction import pull_adtraction_data
 from api.commissions.controllers.awin import pull_awin_data
