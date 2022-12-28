@@ -1,12 +1,12 @@
 from datetime import date, timedelta
-from api.models import Database
+from api.models import Commissions
 from api.commissions.controllers.adrecord import pull_adrecord_data
 from api.commissions.controllers.adtraction import pull_adtraction_data
 from api.commissions.controllers.awin import pull_awin_data
 from api.commissions.controllers.tradedoubler import pull_tradedoubler_data
 
 
-db = Database()
+db = Commissions()
 db.initialize()
 
 

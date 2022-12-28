@@ -3,7 +3,7 @@ from datetime import date
 import os
 
 
-class Database:
+class Model:
     def initialize(self):
         self.uri = os.environ.get("MONGO_URI")
         try:
@@ -13,6 +13,8 @@ class Database:
         except:
             print("Failed to connect to DB")
 
+
+class Commissions(Model):
     def save_commissions_to_db(self, data):
         try:
             self.database.monthly_results.insert_one(data)
@@ -29,3 +31,7 @@ class Database:
             self.database.mediavine_revenue.insert_one(data)
         except:
             print(f"Failed to add mediavine revenue to DB on: {date.today()}")
+
+
+class User(Model):
+    pass

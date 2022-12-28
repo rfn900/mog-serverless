@@ -1,8 +1,8 @@
 from datetime import date
 from .controller import get_mediavine_revenue
-from api.models import Database
+from api.models import Commissions
 
-db = Database()
+db = Commissions()
 db.initialize()
 
 
