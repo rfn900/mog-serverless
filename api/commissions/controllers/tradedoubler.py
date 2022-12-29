@@ -31,7 +31,7 @@ def get_bearer_token():
     return pre_auth_response.json()["access_token"]
 
 
-def pull_tradedoubler_data(fromDate, toDate, interval_type):
+def pull_tradedoubler_data(fromDate: str, toDate: str, interval_type: str):
     b_token = get_bearer_token()
 
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {b_token}"}
@@ -45,8 +45,8 @@ def pull_tradedoubler_data(fromDate, toDate, interval_type):
     response = requests.get(url, headers=headers)
     data = response.json()
 
-    sum = 0
+    sum: int = 0
     for item in data["items"]:
         sum += item["salesCommission"]
 
-    return {"ad_program": "tradedoubler", "commission": sum}
+    return {"ad_program": "tradedoubler", "commission": str(sum)}

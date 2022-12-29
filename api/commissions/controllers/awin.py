@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def pull_awin_data(from_date, to_date):
+def pull_awin_data(from_date: str, to_date: str):
     dateRange = f"startDate={from_date}&endDate={to_date}"
     pub_id = os.environ.get("AWIN_USER_ID")
     geo = "region=SE"
@@ -14,8 +14,8 @@ def pull_awin_data(from_date, to_date):
     response = requests.get(url, headers=headers)
 
     res = response.json()
-    sum = 0
+    sum: int = 0
     for item in res:
         sum += item["totalComm"]
 
-    return {"ad_program": "awin", "commission": sum}
+    return {"ad_program": "awin", "commission": str(sum)}

@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def pull_adtraction_data(from_date, to_date):
+def pull_adtraction_data(from_date: str, to_date: str):
 
     values2 = (
         f"{{ \n"
@@ -21,5 +21,6 @@ def pull_adtraction_data(from_date, to_date):
     response = requests.post(url, data=values2, headers=headers)
 
     data = response.json()
+    commission: str = data["commission"]
 
-    return {"ad_program": "adtraction", "commission": data["commission"]}
+    return {"ad_program": "adtraction", "commission": commission}

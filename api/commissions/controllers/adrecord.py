@@ -2,7 +2,7 @@ import requests
 import os
 
 
-def pull_adrecord_data(from_date, to_date):
+def pull_adrecord_data(from_date: str, to_date: str):
     tkn = os.environ.get("ADRECORD_TOKEN")
     dateRange = (
         f"from={from_date}T00%3A00%3A00%2B01%3A00&to={to_date}T23%3A59%3A59%2B0%3A00"
@@ -14,9 +14,9 @@ def pull_adrecord_data(from_date, to_date):
     response = requests.get(url)
 
     res = response.json()
-    sum = 0
+    sum: int = 0
     for item in res:
         if item["epc"] != 0:
             sum += item["transactions"]["commission"]
 
-    return {"ad_program": "adrecord", "commission": sum}
+    return {"ad_program": "adrecord", "commission": str(sum)}
