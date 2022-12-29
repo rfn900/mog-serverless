@@ -9,9 +9,8 @@ from api.commissions.model import Commissions
 
 
 def grab_commissions_and_save_to_db(event, context):
-    print("Event time was", event["time"])
-    print("This log is", context.log_group_name, context.log_stream_name)
-    print("Time left for execution:", context.get_remaining_time_in_millis())
+    logger.info("This log is", context.log_group_name, context.log_stream_name)
+    logger.info("Time left for execution:", context.get_remaining_time_in_millis())
     # This works specifically for function scheduling for the 1st of every month
     last_of_the_month = date.today() - timedelta(days=1)
     dt = last_of_the_month
@@ -26,7 +25,6 @@ def grab_commissions_and_save_to_db(event, context):
     tradedoubler = pull_tradedoubler_data(
         str(first_of_the_month), str(last_of_the_month), "month"
     )
-    print("***********HELLOOOOOOO**********")
 
     commissions = [
         {"program": "adtraction", "value": adtraction["commission"]},
@@ -37,8 +35,6 @@ def grab_commissions_and_save_to_db(event, context):
     ]
 
     data = {"results": commissions, "date": str(last_of_the_month)}
-
-    print("***********BUNDAAAAAAA**********")
 
     db = Commissions()
     db.initialize()

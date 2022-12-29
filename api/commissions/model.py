@@ -1,15 +1,16 @@
 from datetime import date
 from api.models import Model
 
+from utils.logger import logger
 
 class Commissions(Model):
     def save_commissions_to_db(self, data):
         try:
             self.database.monthly_results.insert_one(data)
-            print(f"Add commissions to DB on: {date.today()}")
             return 1
         except:
-            print(f"Failed to add commissions to DB on: {date.today()}")
+            logger.error("Failed to add commissions to DB")
+            return 2
 
     def load_monthly_results(self):
         return self.database.monthly_results.find()
