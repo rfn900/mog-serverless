@@ -1,5 +1,8 @@
-from api.models import Model
+class Forms:
+    def __init__(self, data) -> None:
+        self.payload = data
 
+    def save(self):
+        from run import db
 
-class Forms(Model):
-    pass
+        db.mog_prod.contacts.insert_one(self.payload)
