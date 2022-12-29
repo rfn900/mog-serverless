@@ -6,6 +6,7 @@ from api.commissions.controllers.adtraction import pull_adtraction_data
 from api.commissions.controllers.awin import pull_awin_data
 from api.commissions.controllers.tradedoubler import pull_tradedoubler_data
 from api.commissions.model import Commissions
+from utils.logger import logger
 
 
 def grab_commissions_and_save_to_db(event, context):
@@ -31,13 +32,12 @@ def grab_commissions_and_save_to_db(event, context):
         {"program": "tradedoubler", "value": tradedoubler["commission"]},
         {"program": "awin", "value": awin["commission"]},
         {"program": "adrecord", "value": adrecord["commission"]},
-        {"program": "misc", "value": 0},  # For now...
+        {"program": "misc", "value": "0"},  # For now...
     ]
 
     data = {"results": commissions, "date": str(last_of_the_month)}
 
-    db = Commissions()
-    db.initialize()
-    com = db.save_commissions_to_db(data)
+    db = Commissions(data)
+    com = db.save_commissions_to_db()
 
     return com

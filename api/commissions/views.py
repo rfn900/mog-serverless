@@ -90,10 +90,10 @@ def get_total_commissions():
     )
 
     sum = (
-        awin_data["commission"]
-        + adrecord_data["commission"]
-        + adtraction_data["commission"]
-        + tradedoubler_data["commission"]
+        float(awin_data["commission"])
+        + float(adrecord_data["commission"])
+        + float(adtraction_data["commission"])
+        + float(tradedoubler_data["commission"])
     )
 
     return {"program": "total", "commission": sum}

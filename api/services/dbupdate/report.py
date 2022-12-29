@@ -6,10 +6,6 @@ from api.commissions.controllers.awin import pull_awin_data
 from api.commissions.controllers.tradedoubler import pull_tradedoubler_data
 
 
-db = Commissions()
-db.initialize()
-
-
 def handler():
     # This works specifically for function scheduling for the 1st of every month
     last_of_the_month = date.today() - timedelta(days=1)
@@ -31,11 +27,12 @@ def handler():
         {"program": "tradedoubler", "value": tradedoubler["commission"]},
         {"program": "awin", "value": awin["commission"]},
         {"program": "adrecord", "value": adrecord["commission"]},
-        {"program": "misc", "value": 0},  # For now...
+        {"program": "misc", "value": "0"},  # For now...
     ]
 
     data = {"results": commissions, "date": str(last_of_the_month)}
 
-    _ = db.save_commissions_to_db(data)
+    db = Commissions(data)
+    _ = db.save_commissions_to_db()
 
     return 1
