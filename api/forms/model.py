@@ -1,5 +1,5 @@
 class Forms:
-    def __init__(self, data) -> None:
+    def register_payload(self, data):
         self.payload = data
 
     def save(self):
