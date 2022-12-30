@@ -27,3 +27,14 @@ def contact():
         return json.loads(json_util.dumps(data))  # All this to convert _id from mongo
     except ValidationError as err:
         return err.messages, 400
+
+
+@bp.route("/contacts/", methods=["GET"])
+def contacts():
+    form = Forms()
+    data = form.retrieve_saved_contacts()
+    formatted_data = []
+    for doc in data:
+        doc.pop("_id")
+        formatted_data.append(doc)
+    return Response(json_util.dumps(formatted_data), mimetype="application/json")
