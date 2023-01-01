@@ -47,5 +47,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      - name: Test
-        run: ls **
+      - name: Zappa deployment
+        run: |
+          source venv/bin/activate
+          zappa update -s gh_zappa_settings.json dev
