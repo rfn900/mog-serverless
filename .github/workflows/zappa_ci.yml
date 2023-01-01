@@ -38,6 +38,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+          deactivate
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -45,3 +46,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
+
+      - name: Test
+        run: ls **
