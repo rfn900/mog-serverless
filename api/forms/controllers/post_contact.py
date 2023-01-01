@@ -1,6 +1,10 @@
+from datetime import datetime
 from flask_mail import Message
-from pymongo.topology import os
 
+from pymongo.client_session import uuid
+from pymongo.topology import os
+from api.forms.model import Forms
+from api.forms.schemas import ContactFormSchema
 from utils.logger import logger
 
 
@@ -32,3 +36,21 @@ def send_email(data):
     mail.send(msg)
 
     logger.info("Mail sent... I guess")
+
+
+def validate_and_return_data(_data):
+    return ContactFormSchema().load(_data)
+
+
+def post_contact(data):
+    data["dateSent"] = datetime.now().isoformat()
+    data["id"] = str(uuid.uuid4())
+    try:
+        form = Forms()
+        form.register_payload(data)
+        form.save()
+        send_email(data)
+        data.pop("_id")
+        return True
+    except:
+        return False
