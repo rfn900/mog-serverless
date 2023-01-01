@@ -1,0 +1,16 @@
+{
+  "dev": {
+    "app_function": "run.app",
+    "profile_name": "zappa_user",
+    "project_name": "server",
+    "runtime": "python3.8",
+    "s3_bucket": "zappa-gop04dkx5",
+    "aws_region": "eu-north-1",
+    "events": [
+      {
+        "function": "api.services.dbupdate.report.handler",
+        "expression": "cron(0 4 1 * ? *)"
+      }
+    ]
+  }
+}
