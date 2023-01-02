@@ -1,9 +1,12 @@
 import json
 from flask import Blueprint, Response, request
 from marshmallow import ValidationError
+from api.auth.controllers.decorators.token_required import token_required
 from api.forms.controllers.post_contact import post_contact, validate_and_return_data
 from api.forms.controllers.retrieve_contacts import retrieve_contacts
 from bson import json_util
+
+from utils.logger import logger
 
 
 bp = Blueprint("forms", __name__, url_prefix="/forms")
@@ -23,6 +26,7 @@ def contact():
 
 
 @bp.route("/contacts/", methods=["GET"])
-def contacts():
+@token_required
+def contacts(current_user):
     formatted_data = retrieve_contacts()
     return Response(json_util.dumps(formatted_data), mimetype="application/json")
