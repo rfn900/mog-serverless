@@ -7,6 +7,13 @@ from functools import wraps
 
 from api.auth.model import User
 
+
+def extract_header(headers):
+    token: str = headers["Authorization"].split(" ")[1]
+    bearer_str: str = headers["Authorization"].split(" ")[0]
+    return token, bearer_str
+
+
 secret_key = os.environ.get("SECRET_KEY") or ""
 # decorator for verifying the JWT
 def token_required(f):
@@ -16,8 +23,7 @@ def token_required(f):
         bearer_str = ""
         # jwt is passed in the request header
         if "Authorization" in request.headers:
-            token = request.headers["Authorization"].split(" ")[1]
-            bearer_str: str = request.headers["Authorization"].split(" ")[0]
+            token, bearer_str = extract_header(request.headers)
         # return 401 if token is not passed
         if not token:
             return {"success": False, "message": "Token missing"}, 401
