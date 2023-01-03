@@ -6,14 +6,13 @@ from api.forms.controllers.post_contact import post_contact, validate_and_return
 from api.forms.controllers.retrieve_contacts import retrieve_contacts
 from bson import json_util
 
-from utils.logger import logger
-
 
 bp = Blueprint("forms", __name__, url_prefix="/forms")
 
 
 @bp.route("/contact/", methods=["POST"])
-def contact():
+@token_required
+def contact(current_user):
     try:
         data = validate_and_return_data(request.json)
         contact_sent = post_contact(data)

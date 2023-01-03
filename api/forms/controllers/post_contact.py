@@ -35,7 +35,7 @@ def send_email(data):
     msg.html = html
     mail.send(msg)
 
-    logger.info("Mail sent... I guess")
+    logger.info(f"Mail sent from {data.get('email')}")
 
 
 def validate_and_return_data(_data):
