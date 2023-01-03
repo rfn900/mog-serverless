@@ -36,7 +36,7 @@ def login():
     )
 
     if token:
-        return {"success": True, "data": {"token": token.decode("UTF-8")}}, 403
+        return {"success": True, "data": {"token": token.decode("UTF-8")}}
 
     # returns 403 if password is wrong
     return {"success": False, "message": "Wrong password or email"}, 403
