@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from werkzeug.utils import os
 
 # import os
 
@@ -20,8 +21,8 @@ def get_mediavine_revenue(period: str):
     url = "https://reporting.mediavine.com/"
     browser.get(url)
 
-    USERNAME = "info@fitnessfia.com"
-    PASSWORD = "Copacabana370"
+    USERNAME = os.environ.get("MEDIAVINE_USERNAME")
+    PASSWORD = os.environ.get("MEDIAVINE_PASSWORD")
 
     time.sleep(1.5)
 
