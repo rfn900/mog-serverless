@@ -39,10 +39,18 @@ def send_email(data):
 
 
 def validate_and_return_data(_data):
+    """
+    Validates data against ContactFormSchemaself.
+    Returns safe data or breaks!
+    """
     return ContactFormSchema().load(_data)
 
 
 def post_contact(data):
+    """
+    This function saves data to db and send the data to destination
+    But first append date and self generated id to payload
+    """
     data["dateSent"] = datetime.now().isoformat()
     data["id"] = str(uuid.uuid4())
     try:
@@ -50,7 +58,7 @@ def post_contact(data):
         form.register_payload(data)
         form.save()
         send_email(data)
-        data.pop("_id")
+        data.pop("_id")  # Need to remove mongo generated id
         return True
     except:
         return False
