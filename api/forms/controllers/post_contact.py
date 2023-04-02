@@ -17,12 +17,16 @@ def send_email(data):
     origin = data.get("origin")
     website = data.get("website")
     message = data.get("message")
+    phone = data.get("phone")
     recipient = os.environ.get("RECIPIENT")
 
     subject = f"Message sent from {origin}, by {name}"
     body = f"Sent From: {origin}\nName: {name}\nContact Email: {email}"
     html = f"<h4>Contact message sent from <b>{origin}</b>:</h4>\n\n"
     html = f"{html}<p><b>Name:</b> {name}</p>" f"<p><b>Contact Email:</b> {email}</p>"
+    if phone:
+        body = f"{body}\nPhone Number: {phone}"
+        html = f"{html}<p><b>Phone Number:</b> <i>{phone}</i></p>"
     if website:
         body = f"{body}\nWebsite: {website}"
         html = f"{html}<p><b>Website</b>: {website}</p>"

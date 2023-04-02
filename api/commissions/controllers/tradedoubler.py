@@ -13,7 +13,6 @@ def encodeStr(str):
 
 
 def get_bearer_token():
-
     username = os.environ.get("TRADEDOUBLER_USERNAME")
     password = os.environ.get("TRADEDOUBLER_PASSWORD")
     client_id = os.environ.get("TRADEDOUBLER_CLIENT_ID")

@@ -10,3 +10,4 @@ class ContactFormSchema(Schema):
     origin = fields.Str(required=True, validate=validate.OneOf(origin))
     website = fields.Str()
     message = fields.Str()
+    phone = fields.Str()
